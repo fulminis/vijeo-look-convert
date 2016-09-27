@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <style type="text/css">
+    body {margin:0;padding:0;width:100%;height:100%;}
+    body input {background-color: transparent;outline: 0;margin:0;padding:0;border:0;color:white}
+~~STYLE_TO_REPLACE~~{}
+  </style>
+  <script>
+    Element.prototype.remove = function() {
+      this.parentElement.removeChild(this);
+    }
+    NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+      for(var i = 0, len = this.length; i < len; i++) {
+        if(this[i] && this[i].parentElement) {
+          this[i].parentElement.removeChild(this[i]);
+        }
+      }
+    }
+    function getInput(object) {
+      input = document.createElement('input');
+      input.setAttribute('type', "text");
+      input.setAttribute('value', "XXX");
+      input.setAttribute('style', "width:100%;height:24px;line-height:" + object.getAttribute('height') + 'px');
+      // input.setAttribute('width', object.getAttribute('width'));
+      // input.setAttribute('height', object.getAttribute('height'));
+
+      form = document.createElement('form');
+      form.appendChild(input);
+      
+      b = document.createElement('body');
+      b.setAttribute('xmlns', "http://www.w3.org/1999/xhtml");
+      b.appendChild(form);
+
+      elem = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
+      elem.setAttribute('x', object.getAttribute('x'));
+      elem.setAttribute('y', object.getAttribute('y'));
+      elem.setAttribute('width', object.getAttribute('width'));
+      elem.setAttribute('height', object.getAttribute('height'));
+      elem.appendChild(input);
+      return elem;
+    }
+    function sendRegister(object) {
+      if(object.getElementsByTagName('foreignObject').length == 0 ) {
+        elem = getInput(object);
+        object.appendChild(elem);
+        object.getElementsByTagName('text').remove();
+      }
+      object.onclick = function() {
+      }
+    }
+    window.onload = function() {
+      sendRegister(document.getElementById('Text1'))
+    }
+  </script>
+</head>
+<body>
+~~TO_REPLACE~~
+</body>
+</html> 
