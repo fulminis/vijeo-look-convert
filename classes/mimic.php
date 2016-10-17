@@ -24,7 +24,8 @@ class Mimic{
         $svg = new SimpleXMLElement(file_get_contents('template.xml'));
         $svg->addAttribute('width', $this->windowWidth);
         $svg->addAttribute('height', $this->windowHeight);
-        $svg->addAttribute('fill', $this->backgroundColor);
+        // $svg->addAttribute('fill', $this->backgroundColor);
+        $svg->addAttribute('style', 'background-color:' . $this->backgroundColor . '');
 
         return $svg;
     }

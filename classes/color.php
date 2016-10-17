@@ -15,13 +15,24 @@ class Colors extends Common {
         if($temp[6] >= 32) {
             global $paleteFile;
             preg_match('/GradientIdx,0,' . $temp[6] .'.*/', $paleteFile, $matches);
-            $gradientx = str_replace('GradientIdx,0,' . $temp[6],',GRADIENT', $matches[0]);
-            $temp = array_map('trim', explode(',', $line . $gradientx));
+            if(isset($matches[0])) {
+                $gradientx = str_replace('GradientIdx,0,' . $temp[6],',GRADIENT', $matches[0]);
+                $temp = array_map('trim', explode(',', $line . $gradientx));
+            } else {
+                preg_match('/ColorIdx,0,' . $temp[6] .'.*/', $paleteFile, $matches);
+                $t = explode(',', $matches[0]);
+                // var_dump(trim($t[3])[4].trim($t[3])[5]);
+                $color['b'] = hexdec(trim($t[3])[4].trim($t[3])[5]);
+                $color['g'] = hexdec(trim($t[3])[6].trim($t[3])[7]);
+                $color['r'] = hexdec(trim($t[3])[8].trim($t[3])[9]);
+            }
+        } else {
+            $color['r'] = $temp[2];
+            $color['g'] = $temp[3];
+            $color['b'] = $temp[4];
         }
         $color['number'] = $temp[1];
-        $color['r'] = $temp[2];
-        $color['g'] = $temp[3];
-        $color['b'] = $temp[4];
+        
         $color['period'] = $temp[5];
         $color['position'] = $temp[6];
         $color['alpha'] = $temp[7] == 0 ? 1 : 0;

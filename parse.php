@@ -53,9 +53,8 @@ function parse($handle, &$svg = null){
                                 addChild($t->toXml());
                                 break;
                             case 'A': //Arc
-                                echo 'Arc', PHP_EOL;
-                                // $t = new Arc($block);
-                                // addChild($t->toXml());
+                                $t = new Arc($block);
+                                addChild($t->toXml());
                                 break;
                             case 'R':
                                 $t = new Rectangle($block);

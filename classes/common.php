@@ -29,6 +29,9 @@ class Common {
                 case 'ST':
                     $this->parseState($line);
                     break;
+                case 'AST': 
+                    $this->parseAst($line);
+                    break;
             }
         }
         if($data['objectType'] == 'GRP') {
@@ -36,6 +39,7 @@ class Common {
         }
     }
     public function parseState($line) {
+        // 0 1 2     3 4     5 6 7 8     9 0 1     2 3 4     5 6 7     
         //ST,0,1,COLOR,1,COLOR,1,0,5,COLOR,5,5,COLOR,5,0,COLOR,4,0,COLOR,4
         $prop = explode(',', $line);
         $this->line['style'] = $this->lineStyles[$prop[1]];

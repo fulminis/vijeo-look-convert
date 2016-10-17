@@ -3,6 +3,9 @@ include 'parse.php';
 $projectPath = realpath('../data/');
 $outPath = realpath('../dataOut/');
 
+// $projectPath = realpath('../asfalt/');
+// $outPath = realpath('../asfaltOut/');
+
 $imagesSrc = $projectPath . '/Bitmap Files/';
 $imagesDest = $outPath . '/img/';
 $paleteFile = file_get_contents($projectPath . '/Config Files/palcol.dat');
